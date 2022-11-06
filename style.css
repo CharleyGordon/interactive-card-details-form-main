@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
+:root {
+  --smallgap: 0.5rem;
+  --normalgap: 1rem;
+  --blockpadding: 1em;
+  --inlinepadding: 1em;
+  --color-input-error: hsl(0, 100%, 66%);
+  --color-light-violet: hsl(270, 3%, 87%);
+  --color-dark-violet: Dark grayish violet: hsl(279, 6%, 55%);
+  --color-very-dark-violet: hsl(278, 68%, 11%);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+[data-width100] {
+  width: 100%;
+}
+[data-flex] {
+  display: flex;
+}
+[data-grid] {
+  display: grid;
+}
+[data-grid] * {
+  min-width: 0;
+}
+[data-align-items="center"] {
+  align-items: center;
+}
+[data-justuify-content="center"] {
+  justify-content: center;
+}
+[data-justify-content="space-arround"] {
+  justify-content: space-around;
+}
+[data-justify-content="space-between"] {
+  justify-content: space-between;
+}
+[data-justify-self="center"] {
+  justify-self: center;
+}
+[data-relative] {
+  position: relative;
+}
+[data-absolute] {
+  position: absolute;
+}
+[data-text-center] {
+  text-align: center;
+}
+fieldset {
+  padding-inline: 1rem;
+  border: none;
+  font-size: 0.8rem;
+  color: var(--color-very-dark-violet);
+  text-transform: uppercase;
+  letter-spacing: .35vw;
+  grid-row: 1;
+  grid-column: 1;
+  transition: translate .3s ease;
+}
+fieldset:not([data-current]) {
+  translate: 200%;
+}
+  .fields {
+      grid-auto-columns: max-content;
+      overflow: hidden;
+    margin: auto auto;
+  }
+input {
+  padding: var(--blockpadding) var(--inlinepadding);
+  border: none;
+  border-radius: 1vmax;
+  box-shadow: 0 0 0.75rem 0.5px hsla(0, 0%, 60%, 0.604);
+  color: inherit;
+  font-weight: 700;
+}
+input:invalid,
+input:focus:invalid {
+  outline: 2px solid var(--color-input-error);
+  outline-offset: -1px;
+}
+.invalid {
+  transition: .2s ease;
+  text-transform: capitalize;
+  pointer-events: none;
+}
+.invalid-cvc {
+  margin-inline-start: auto;
+}
+/* [type="number"] + .invalid {
+  top: calc(210% + .5rem);
+} */
+.invalid:not(data-invalid) {
+  opacity: 0;
+  /* position: absolute; */
+  left: 0;
+  max-height: 0;
+/* translate: 0 -120%; */
+color: var(--color-input-error);
+}
+.invalid[data-invalid] {
+  opacity: 1;
+  max-height: 100px;
+}
+input:focus {
+  outline: 2px solid hsl(271, 76%, 53%);
+  outline-offset: -1px;
+}
+[type="number"] {
+  appearance: none;
+  appearance: textfield;
+}
+#card-number {
+  text-transform: uppercase;
+}
+
+.cvc-info {
+place-self: center end;
+translate: -2rem;
+z-index: 1;
+color: var(--color-light-violet);
+scale: .8;
+}
+.card-front {
+  grid-template-areas: "logo . . . "
+                        ". . . . "
+                        "num num num . "
+                        "name . . date ";
+                        grid-template-rows: repeat(4, 1fr);
+                        text-indent: 1rem;
+}
+:where(.card-front, .card-back) :where(span) {
+  align-self: center;
+  height: max-content;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: .25ch;
+}
+.card-logo {
+  grid-area: logo;
+scale: .7;
+object-fit: contain;
+}
+.card-img,
+.cvc-info {
+  grid-area: 1 / 1 /-1 /-1;
+}
+[class *="card"] img {
+    border-radius: 10px;
+}
+.num {
+    grid-area: num;
+    
+}
+.num,
+.num * {
+  width: fit-content;
+}
+
+.name {
+  grid-area: name;
+  text-indent: 0;
+
+}
+.date {
+  grid-area: date;
+}
+
+.confirm[value],
+::placeholder {
+  font-family: inherit;
+  font-size: clamp(.6rem, 1rem, 1.2rem);
+} 
+::placeholder {
+  color: var(--color-dark-violet);
+  opacity: .35;
+}
+.expires {
+  gap: 3vw;
+}
+
+.expires > * {
+  flex-grow: 1;
+}
+.expires ::placeholder,
+.expires :is(input:not(:last-of-type)) {
+  text-align: center;
+}
+.cvc {
+  width: 90%;
+}
+.cvc input {
+  width: 100%;
+}
+.cvc::placeholder {
+  text-align: start;
+}
+.cvc::before {
+    content: "CVC";
+  position: absolute;
+  translate: 0 calc(-100% - .5rem);
+
+}
+.confirm {
+  background-color: var(--color-very-dark-violet);
+  color: white;
+  cursor: pointer;
+}
+/* thank you section */
+.completed-form {
+  gap: var(--normalgap);
+}
+.thank-svg {
+  place-content: center;
+}
+.completed {
+  font-size: min(4vmax, 3rem);
+}
+.completed-caption {
+  color: hsla(0, 0%, 53%, 0.841);
+font-size: 1rem;
+text-transform: capitalize;
+}
+
+@media (max-width: 1200px) {
+  .fields {
+    grid-auto-columns: auto;
+  }
+  .card-placeholder,
+  fieldset {
+    max-width: 500px;
+    margin-inline: auto;
+  }
+   .card-front {
+    translate: -10% 50%;
+  }
+  .card-back {
+    translate: 5%;
+  }
+  .flex-wrapper {
+    flex-direction: column;
+    gap: 7rem;
+  }
+  .card {
+    background-image: url("images/bg-main-mobile.png");
+    background-size: cover;
+  }
+  .card-placeholder {
+    padding: 2rem;
+  }
+  .name,
+.date {
+  scale: .7;
+  width: max-content;
+}
+  .c-form {
+    gap: 0.5rem;
+  }
+  .card-front,
+  .card-back {
+    grid-column: 1;
+    grid-row: 1;
+    padding: var(--normalgap);
+  }
+  .invalid[data-invalid] {
+    margin-block-start: .5rem;
+  }
+  .confirm {
+    margin-block-start: var(--normalgap);
+  }
+ 
+}
+@media (min-width: 1200px) {
+  input {
+    border-radius: .5vmax;
+    --blockpadding: 1.3em;
+    --inlinepadding: 1.3em;
+  }
+  .card {
+    max-width: 450px;
+    height: 100vh;
+    align-content: center;
+    background-image: url("images/bg-main-desktop.png");
+    background-size: cover;
+  }
+  .card-placeholder {
+    gap: 5vh;
+  }
+  .card-back {
+   
+    order: 1;
+    translate: 50%;
+  }
+  .card-front {
+    translate: 25%;
+    grid-template-columns: repeat(4, max-content);
+  }
+  .name {
+    translate: 1em;
+  }
+  .cvc-info {
+    translate: -200%;
+    scale: 1;
+  }
+  .expires,
+.invalid[data-invalid],
+#card-number {
+  margin-block-end: -1rem;
+}
+  fieldset {
+
+    max-width: 25vw;
+    z-index: 1;
+    background-color: white;
+    border-radius: 20px;
+  }
+  fieldset {
+    margin: auto auto;
+  }
+  .c-form {
+    grid-auto-rows: max-content;
+    gap: 2em;
+  }
+
+  .cvc::before {
+    translate: 0 calc(-100% - 1.5rem);
+  }
+}
